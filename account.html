@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Account | MonGa Cafe</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://use.typekit.net/rsi4ild.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+
+<body style="background:#2e282a; text-align:center;">
+
+    <h1 style="margin-top:80px; color:#ffead7;">👤 My Account</h1>
+
+    <div class="auth-container" style="margin-top:30px;">
+        <p><strong>Email:</strong> <span id="acct-email">Loading…</span></p>
+        <button id="acct-logout" class="auth-btn secondary" style="margin-top:16px;">Log Out</button>
+        <button id="acct-delete" class="auth-btn" style="margin-top:10px; background:#a33e45;">Delete Account</button>
+        <p id="acct-msg" style="margin-top:10px;"></p>
+    </div>
+
+    <script type="module" src="auth.js"></script>
+
+    <script type="module">
+        import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        const auth = getAuth();
+        const emailSpan = document.getElementById("acct-email");
+        const msg = document.getElementById("acct-msg");
+        const btnLogout = document.getElementById("acct-logout");
+        const btnDelete = document.getElementById("acct-delete");
+
+        onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = "signin.html";
+            return;
+        }
+        emailSpan.textContent = user.email || "(no email)";
+        });
+
+        btnLogout.addEventListener("click", async () => {
+        try {
+            await signOut(auth);
+            localStorage.setItem("justLoggedOut", "true");
+            window.location.href = "index.html";
+        } catch (e) {
+            msg.textContent = "Error signing out: " + e.message;
+        }
+        });
+
+        btnDelete.addEventListener("click", async () => {
+        const ok = confirm("Delete your account permanently? You may need to sign in again.");
+        if (!ok) return;
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+            msg.textContent = "You are not signed in.";
+            return;
+            }
+            await deleteUser(user);
+            localStorage.setItem("justLoggedOut", "true");
+            window.location.href = "index.html";
+        } catch (e) {
+            msg.textContent = (e.code === "auth/requires-recent-login")
+            ? "Please sign in again and try deleting your account."
+            : "Error deleting account: " + e.message;
+        }
+        });
+    </script>
+</body>
+</html>

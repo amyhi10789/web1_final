@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | MonGa Cafe</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/rsi4ild.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body style="background: #2e282a">
+
+    <div class="custom-navbar">
+        <nav>
+            <div class="left-group">
+                <a href="index.html"><img src="images/monga_cafe_logo.png" class="logo"></a>
+                <a href="index.html">Home</a>
+                <a href="history.html">History</a>
+            </div>
+            <div class="right-group">
+                <a href="menu.html">Menu</a>
+                <a href="signin.html" class="account-btn"><i class="fa-solid fa-user"></i></a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="auth-container">
+        <h2>Welcome back!</h2>
+
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+
+        <button id="signin-btn" class="auth-btn">Sign In</button>
+        <button id="signup-btn" class="auth-btn secondary">Create Account</button>
+
+        <div class="divider">or</div>
+
+        <button id="google-btn" class="google-btn">
+            <i class="fa-brands fa-google"></i> Sign in with Google
+        </button>
+
+        <p id="auth-message"></p>
+    </div>
+
+    <script type="module" src="auth.js"></script>
+
+</body>
+</html>
