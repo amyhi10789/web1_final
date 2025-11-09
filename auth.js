@@ -38,7 +38,7 @@ if (signinBtn) {
         localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
-      .catch(err => (authMsg.textContent = "❌ " + err.message));
+      .catch(err => (authMsg.textContent = err.message));
   });
 }
 
@@ -49,7 +49,7 @@ if (signupBtn) {
         localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
-      .catch(err => (authMsg.textContent = "❌ " + err.message));
+      .catch(err => (authMsg.textContent = err.message));
   });
 }
 
@@ -60,7 +60,7 @@ if (googleBtn) {
         localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
-      .catch(err => (authMsg.textContent = "❌ " + err.message));
+      .catch(err => (authMsg.textContent = err.message));
   });
 }
 
