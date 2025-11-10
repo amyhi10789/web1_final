@@ -276,6 +276,24 @@ html, body {
     overflow: visible;
 }
 
+.popup-box {
+    padding: 50px 45px 50px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.popup-box p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .popup-close {
     position: absolute;
     top: 12px;
@@ -380,3 +398,66 @@ html, body {
 
 .divider { margin: 18px 0; font-size: 18px; opacity: 0.6; }
 #auth-message { margin-top: 10px; font-size: 16px; }
+
+.history-section {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 60px auto;
+    width: 90%;
+}
+
+.history-card {
+    background: #743d42;
+    border: 3px solid #b6636a;
+    width: 1200px;
+    height: 110px;
+    border-radius: 18px;
+    text-align: center;
+    color: #fff;
+    transition: 0.25s ease;
+}
+
+.history-card:hover {
+    transform: translateY(-6px);
+    background: #c14953;
+}
+
+.history-card h3 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.history-card p {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+.historyinfo-section {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 60px auto;
+    width: 90%;
+}
+
+.historyinfo-card {
+    background: #634850;
+    border: 3px solid #000000;
+    width: 1100px;
+    border-radius: 18px;
+    text-align: left;
+    color: #fff;
+    transition: 0.25s ease;
+    padding: 30px;
+}
+
+.historyinfo-card h3 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.historyinfo-card p {
+    font-size: 20px;
+    opacity: 0.9;
+}

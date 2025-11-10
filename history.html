@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>History | MonGa Cafe</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://use.typekit.net/rsi4ild.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/rsi4ild.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
-<body style="background: #2e282a">
+<body style="background:#2e282a">
     <div class="custom-navbar">
         <nav>
-
             <div class="left-group">
                 <a href="index.html">
-                    <img src="images/monga_cafe_logo.png" alt="Logo" class="logo">
+                    <img src="images/monga_cafe_logo.png" alt="Logo" class="logo" />
                 </a>
                 <a href="index.html">Home</a>
                 <a href="history.html">History</a>
@@ -23,33 +23,89 @@
 
             <div class="right-group">
                 <a href="menu.html">Menu</a>
-                <a href="signin.html" class="account-btn">
+
+                <a href="signin.html" id="login-btn" class="account-btn">
                     <i class="fa-solid fa-user"></i>
                 </a>
-            </div>
 
+                <div id="user-dropdown" class="user-dropdown" style="display:none;">
+                    <i id="user-icon" class="fa-solid fa-user"></i>
+                    <div id="dropdown-menu" class="dropdown-content">
+                        <a href="account.html">My Account</a>
+                        <a href="#" id="logout-btn">Log Out</a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </div>
 
+    <section class="history-section">
+        <div class="history-card">
+            <h3>About MonGa Cafe</h3>
+        </div>
+    </section>
+
+    <section class="historyinfo-section">
+        <div class="historyinfo-card">
+            <p>Monga, Wanhua District is an old district in Taipei, Taiwan. Home to historic buildings, it represents the genuine Taiwan culture. MonGa Cafe serves authentic Taiwanese food from milk tea (made from real tea leaves) to our famous fried chicken, beef soup noodles and wild choices of vegetarian dishes.</p>
+            <p>Our food contains less salt and oil than many of our competitors, and we are proud to offer great service from a friendly, knowledgeable staff. At our Taiwanese restaurant, we speak both English and Chinese and proudly offer both takeout and dine-in options for your convenience. Dine-in and take out services daily. Visit us today!</p>
+        </div>
+    </section>
+
+    <section class="history-section">
+        <div class="history-card">
+            <h3>History of Taiwanese Food</h3>
+        </div>
+    </section>
+
+    <section class="historyinfo-section">
+        <div class="historyinfo-card">
+            <p>Taiwanese food has deep roots in its indigenous cultures, which relied on local ingredients like millet, taro, and sweet potatoes. Early cooking methods focused on grilling, steaming, and preserving foods with salt, shaped by the island's tropical climate and available resources.</p>
+            <p>When Han Chinese settlers arrived from Fujian and Guangdong in the 1600s, they introduced soy sauce, rice, noodles, and various stir-frying and braising techniques. This blending of traditions laid the foundation for many classic Taiwanese dishes, combining coastal Chinese flavors with local produce.</p>
+            <p>During Japan's rule from 1895 to 1945, Western-style desserts, tempura, and bento boxes became part of everyday cuisine. Later, the arrival of mainland Chinese refugees in 1949 added even more regional diversity. Today, Taiwanese food celebrates this mix of influences through favorites like beef noodle soup, popcorn chicken, and bubble tea.</p>
+        </div>
+    </section>
+
+    <section class="history-section">
+        <div class="history-card">
+            <h3>Bringing our culture to America</h3>
+        </div>
+    </section>
+
+    <section class="historyinfo-section">
+        <div class="historyinfo-card">
+            <p>Taiwanese cuisine carries centuries of culture, and MonGa Café brings that legacy to America with care and authenticity. Inspired by Monga, the historic Wanhua District of Taipei, the restaurant reflects the area's vibrant food scene and deep cultural roots. Every dish tells part of Taiwan's story; from crispy fried chicken and hearty beef noodle soup to vegetarian specialties that showcase local freshness and balance. By using real tea leaves in its milk tea and lighter, healthier ingredients in its recipes, MonGa Café honors traditional flavors while catering to modern tastes. More than just a place to eat, it's a celebration of Taiwan's culinary spirit, served with warmth and pride.</p>
+        </div>
+    </section>
+
     <footer class="email-footer">
         <h2 class="footer-heading">Sign up to receive updates!</h2>
-
-        <form class="signup-form">
-            <input type="email" placeholder="email" required>
+        <form class="signup-form" id="signup-form">
+            <input type="email" placeholder="email" required />
             <button type="submit">Sign Up</button>
         </form>
-
         <p class="footer-note">MonGa Cafe, Bellevue WA</p>
     </footer>
 
     <div id="signupPopup" class="popup-overlay">
         <div class="popup-box">
             <button class="popup-close" aria-label="Close popup">&times;</button>
-            <h2 style="font-size: 26px"><strong>Thanks for signing up!</strong></h2>
+            <h2 style="font-size:26px"><strong>Thanks for signing up!</strong></h2>
             <p>We appreciate the support.</p>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="login-toast" class="toast">
+        <p><strong>Thanks for logging in!</strong><br>Welcome back to MonGa Cafe!</p>
+        <button id="toast-close">&times;</button>
+    </div>
+
+    <div id="logout-toast" class="toast">
+        <p><strong>You've been logged out!</strong></p>
+        <button id="toast-close-logout">&times;</button>
+    </div>
+
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
