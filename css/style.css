@@ -461,3 +461,72 @@ html, body {
     font-size: 20px;
     opacity: 0.9;
 }
+
+.menuitem-section {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 60px auto;
+    width: 90%;
+}
+
+.menuitem-card {
+    background: #634850;
+    border: 3px solid #000000;
+    width: 450px;
+    height: 240px;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    transition: 0.25s ease;
+}
+
+.menuitem-card:hover {
+    transform: translateY(-6px);
+    background: #c14953;
+}
+
+.menuitem-card h3 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.menuitem-card p {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+.menu-section {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 60px auto;
+    width: 90%;
+}
+
+.menu-card {
+    background: #743d42;
+    border: 3px solid #b6636a;
+    width: 1200px;
+    height: 110px;
+    border-radius: 18px;
+    text-align: center;
+    color: #fff;
+    transition: 0.25s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-6px);
+    background: #c14953;
+}
+
+.menu-card h3 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.menu-card p {
+    font-size: 20px;
+    opacity: 0.9;
+}
