@@ -11,62 +11,166 @@
 
 <body style="background:#2e282a; text-align:center;">
 
-    <h1 style="margin-top:80px; color:#ffead7;">My Account</h1>
+<h1 style="margin-top:60px; color:#ffead7;">My Account</h1>
 
-    <div class="auth-container" style="margin-top:30px;">
-        <p><strong>Email:</strong> <span id="acct-email">Loading…</span></p>
-        <button id="acct-logout" class="auth-btn secondary" style="margin-top:16px;">Log Out</button>
-        <button id="acct-delete" class="auth-btn" style="margin-top:10px; background:#a33e45;">Delete Account</button>
-        <p id="acct-msg" style="margin-top:10px;"></p>
+<div class="auth-container"
+     style="margin:40px auto; padding:30px; width:90%; max-width:420px;
+            background:#2e282a; border-radius:16px; color:#ffead7;">
+
+    <div style="
+        background:#3a3436; 
+        padding:22px; 
+        border-radius:14px; 
+        margin-bottom:25px;
+        text-align:center;
+    ">
+
+        <p><strong>Name:</strong> <span id="acct-name">Loading…</span></p>
+
+        <div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+
+            <input id="name-edit" type="text" placeholder="Enter new name"
+                style="
+                        margin-top:10px; 
+                        padding:8px; 
+                        width:85%; 
+                        max-width:250px;
+                        display:none;
+                        border-radius:10px; 
+                        border:none; 
+                        background:#564d4f; 
+                        color:#ffead7;
+                        text-align:center;
+                ">
+
+            <button id="edit-name-btn" class="auth-btn secondary"
+                    style="
+                        margin-top:12px; 
+                        padding:8px 16px; 
+                        border-radius:10px;
+                        width:85%; 
+                        max-width:250px;
+                    ">
+                Edit Name
+            </button>
+
+            <button id="save-name-btn" class="auth-btn"
+                    style="
+                        margin-top:12px; 
+                        padding:8px 16px; 
+                        border-radius:10px; 
+                        display:none;
+                        width:85%; 
+                        max-width:250px;
+                    ">
+                Save Name
+            </button>
+
+        </div>
     </div>
 
-    <script type="module" src="auth.js"></script>
+    <div style="background:#3a3436; padding:22px; border-radius:14px; margin-bottom:25px;">
+        <p><strong>Email:</strong> <span id="acct-email">Loading…</span></p>
+    </div>
 
-    <script type="module">
-        import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+    <div style="background:#3a3436; padding:22px; border-radius:14px; margin-bottom:25px;">
+        <button id="acct-logout" class="auth-btn secondary"
+                style="width:85%; padding:10px; border-radius:10px; margin-bottom:15px;">
+            Log Out
+        </button>
 
-        const auth = getAuth();
-        const emailSpan = document.getElementById("acct-email");
-        const msg = document.getElementById("acct-msg");
-        const btnLogout = document.getElementById("acct-logout");
-        const btnDelete = document.getElementById("acct-delete");
+        <button id="acct-delete" class="auth-btn"
+                style="width:85%; padding:10px; border-radius:10px; background:#a33e45;">
+            Delete Account
+        </button>
 
-        onAuthStateChanged(auth, (user) => {
+        <p id="acct-msg" style="margin-top:5px; font-size:14px;"></p>
+    </div>
+
+    <button id="back-btn" class="auth-btn"
+            style="background:#444; color:#ffead7;
+            padding:10px 20px; border:none; border-radius:14px; cursor:pointer;">
+        ← Back
+    </button>
+
+</div>
+
+<script type="module">
+    import { auth } from "./auth.js";
+    import {
+        onAuthStateChanged,
+        updateProfile,
+        signOut,
+        deleteUser
+    } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+    const emailSpan = document.getElementById("acct-email");
+    const nameSpan = document.getElementById("acct-name");
+    const nameEdit = document.getElementById("name-edit");
+    const editNameBtn = document.getElementById("edit-name-btn");
+    const saveNameBtn = document.getElementById("save-name-btn");
+
+    const msg = document.getElementById("acct-msg");
+
+    document.getElementById("back-btn").addEventListener("click", () => {
+        if (document.referrer) window.history.back();
+        else window.location.href = "index.html";
+    });
+
+    onAuthStateChanged(auth, (user) => {
         if (!user) {
             window.location.href = "signin.html";
             return;
         }
-        emailSpan.textContent = user.email || "(no email)";
-        });
 
-        btnLogout.addEventListener("click", async () => {
+        emailSpan.textContent = user.email;
+        nameSpan.textContent = user.displayName || "(no name)";
+    });
+
+    editNameBtn.addEventListener("click", () => {
+        nameEdit.style.display = "block";
+        saveNameBtn.style.display = "block";
+        editNameBtn.style.display = "none";
+        nameEdit.value = nameSpan.textContent;
+    });
+
+    saveNameBtn.addEventListener("click", async () => {
+        const newName = nameEdit.value.trim();
+        if (!newName) return;
+
         try {
-            await signOut(auth);
-            localStorage.setItem("justLoggedOut", "true");
-            window.location.href = "index.html";
-        } catch (e) {
-            msg.textContent = "Error signing out: " + e.message;
-        }
-        });
+            await updateProfile(auth.currentUser, { displayName: newName });
+            nameSpan.textContent = newName;
 
-        btnDelete.addEventListener("click", async () => {
-        const ok = confirm("Delete your account permanently? You may need to sign in again.");
+            nameEdit.style.display = "none";
+            saveNameBtn.style.display = "none";
+            editNameBtn.style.display = "block";
+        } catch (e) {
+            msg.textContent = "Error saving name: " + e.message;
+        }
+    });
+
+    document.getElementById("acct-logout").addEventListener("click", async () => {
+        await signOut(auth);
+        window.location.href = "index.html";
+    });
+
+    document.getElementById("acct-delete").addEventListener("click", async () => {
+        const ok = confirm("Delete your account permanently?");
         if (!ok) return;
+
         try {
-            const user = auth.currentUser;
-            if (!user) {
-            msg.textContent = "You are not signed in.";
-            return;
-            }
-            await deleteUser(user);
-            localStorage.setItem("justLoggedOut", "true");
+            await deleteUser(auth.currentUser);
             window.location.href = "index.html";
         } catch (e) {
-            msg.textContent = (e.code === "auth/requires-recent-login")
-            ? "Please sign in again and try deleting your account."
-            : "Error deleting account: " + e.message;
+            msg.textContent =
+                e.code === "auth/requires-recent-login"
+                    ? "Please sign in again and then delete."
+                    : "Error deleting: " + e.message;
         }
-        });
-    </script>
+    });
+
+</script>
+
 </body>
 </html>

@@ -18,8 +18,13 @@ const firebaseConfig = {
   measurementId: "G-DZG8MM11KZ"
 };
 
-const app = window.__MONGA_APP__ || initializeApp(firebaseConfig);
-window.__MONGA_APP__ = app;
+let app;
+if (!window.__MONGA_APP__) {
+  app = initializeApp(firebaseConfig);
+  window.__MONGA_APP__ = app;
+} else {
+  app = window.__MONGA_APP__;
+}
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -35,10 +40,9 @@ if (signinBtn) {
   signinBtn.addEventListener("click", () => {
     signInWithEmailAndPassword(auth, emailInput.value, passInput.value)
       .then(() => {
-        localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
-      .catch(err => (authMsg.textContent = err.message));
+      .catch(err => authMsg.textContent = err.message);
   });
 }
 
@@ -46,10 +50,9 @@ if (signupBtn) {
   signupBtn.addEventListener("click", () => {
     createUserWithEmailAndPassword(auth, emailInput.value, passInput.value)
       .then(() => {
-        localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
-      .catch(err => (authMsg.textContent = err.message));
+      .catch(err => authMsg.textContent = err.message);
   });
 }
 
@@ -57,16 +60,10 @@ if (googleBtn) {
   googleBtn.addEventListener("click", () => {
     signInWithPopup(auth, provider)
       .then(() => {
-        localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
-      .catch(err => (authMsg.textContent = err.message));
+      .catch(err => authMsg.textContent = err.message);
   });
 }
 
-onAuthStateChanged(auth, (user) => {
-  if (user && window.location.pathname.includes("signin.html")) {
-    localStorage.setItem("justLoggedIn", "true");
-    window.location.href = "index.html";
-  }
-});
+export { auth };
