@@ -152,6 +152,7 @@
 
     document.getElementById("acct-logout").addEventListener("click", async () => {
         await signOut(auth);
+        localStorage.setItem("justLoggedOut", "true");
         window.location.href = "index.html";
     });
 

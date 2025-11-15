@@ -4,8 +4,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -40,6 +39,7 @@ if (signinBtn) {
   signinBtn.addEventListener("click", () => {
     signInWithEmailAndPassword(auth, emailInput.value, passInput.value)
       .then(() => {
+        localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
       .catch(err => authMsg.textContent = err.message);
@@ -50,6 +50,7 @@ if (signupBtn) {
   signupBtn.addEventListener("click", () => {
     createUserWithEmailAndPassword(auth, emailInput.value, passInput.value)
       .then(() => {
+        localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
       .catch(err => authMsg.textContent = err.message);
@@ -60,6 +61,7 @@ if (googleBtn) {
   googleBtn.addEventListener("click", () => {
     signInWithPopup(auth, provider)
       .then(() => {
+        localStorage.setItem("justLoggedIn", "true");
         window.location.href = "index.html";
       })
       .catch(err => authMsg.textContent = err.message);

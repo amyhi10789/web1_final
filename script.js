@@ -31,25 +31,36 @@ if (logoutBtn) {
   });
 }
 
-const loginToast = document.getElementById("login-toast");
-const logoutToast = document.getElementById("logout-toast");
+window.addEventListener("load", () => {
+  const loginToast = document.getElementById("login-toast");
+  const logoutToast = document.getElementById("logout-toast");
 
-if (localStorage.getItem("justLoggedIn") === "true") {
-  loginToast && (loginToast.style.display = "flex");
-  localStorage.removeItem("justLoggedIn");
-}
+  const onIndex =
+    window.location.pathname.includes("index.html") ||
+    window.location.pathname === "/";
 
-if (localStorage.getItem("justLoggedOut") === "true") {
-  logoutToast && (logoutToast.style.display = "flex");
-  localStorage.removeItem("justLoggedOut");
-}
+  if (onIndex) {
+    if (localStorage.getItem("justLoggedIn") === "true") {
+      loginToast && (loginToast.style.display = "flex");
+      localStorage.removeItem("justLoggedIn");
+    }
 
-document.getElementById("toast-close")?.addEventListener("click", () => {
-  loginToast.style.display = "none";
-});
+    if (localStorage.getItem("justLoggedOut") === "true") {
+      logoutToast && (logoutToast.style.display = "flex");
+      localStorage.removeItem("justLoggedOut");
+    }
+  } else {
+    if (loginToast) loginToast.style.display = "none";
+    if (logoutToast) logoutToast.style.display = "none";
+  }
 
-document.getElementById("toast-close-logout")?.addEventListener("click", () => {
-  logoutToast.style.display = "none";
+  document.getElementById("toast-close")?.addEventListener("click", () => {
+    loginToast.style.display = "none";
+  });
+
+  document.getElementById("toast-close-logout")?.addEventListener("click", () => {
+    logoutToast.style.display = "none";
+  });
 });
 
 const userIcon = document.getElementById("user-icon");
@@ -63,10 +74,7 @@ if (userIcon && dropdownMenu) {
   });
 
   dropdownMenu.addEventListener("click", (e) => e.stopPropagation());
-
-  document.addEventListener("click", () => {
-    dropdownMenu.style.display = "none";
-  });
+  document.addEventListener("click", () => (dropdownMenu.style.display = "none"));
 }
 
 const signupForm = document.getElementById("signup-form");
