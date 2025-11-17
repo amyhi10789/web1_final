@@ -1,5 +1,5 @@
 * {
-    font-family: "playwrite-cc-us-modern", sans-serif !important;
+    font-family: "poppins", sans-serif !important;
     box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@ i, .fa, .fa-solid, .fa-user {
 
 html, body {
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 20px;
     background: #2e282a;
 }
@@ -45,7 +45,7 @@ html, body {
 .left-group a,
 .right-group a {
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 550;
     color: #3a2a2a;
     transition: 0.2s ease;
 }
@@ -201,7 +201,7 @@ html, body {
 
 .footer-heading {
     font-size: 36px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 22px;
     color: #ffdfc9;
 }
@@ -235,7 +235,7 @@ html, body {
     font-size: 18px;
     color: white;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 500;
     transition: 0.25s ease;
 }
 
@@ -460,6 +460,7 @@ html, body {
 .historyinfo-card p {
     font-size: 20px;
     opacity: 0.9;
+    font-weight: normal;
 }
 
 .menuitem-section {
@@ -493,8 +494,9 @@ html, body {
 }
 
 .menuitem-card p {
-    font-size: 12px;
+    font-size: 10px;
     opacity: 0.9;
+    font-weight: normal;
 }
 
 .menuitem-card h4 {
@@ -528,4 +530,9 @@ html, body {
 .menu-card h3 {
     font-size: 30px;
     margin-bottom: 8px;
+}
+
+#google-btn .google-icon {
+    width: 16px;
+    height: 16px;
 }
